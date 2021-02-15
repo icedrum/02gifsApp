@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GiftsService } from '../../gifts/services/gifts.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private gifser:GiftsService) { }
+
+  get historial():String[]{
+    return this.gifser.historial;
+  }
 
   ngOnInit(): void {
+    
   }
 
 }
