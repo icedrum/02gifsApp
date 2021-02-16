@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -7,6 +8,10 @@ export class GiftsService {
 
 
   private Api="5VWWCnOta9fEtkXNqSSLTGQR9X03MKbb";
+
+  // TODO  Poner el tipado correcto
+  public resultados:any[]=[] 
+
 
   private _historial: string[]=[];
   get historial():string[]{
@@ -26,10 +31,15 @@ export class GiftsService {
 
     }
 
+    const url: string=`http://api.giphy.com/v1/gifs/search?api_key=5VWWCnOta9fEtkXNqSSLTGQR9X03MKbb&q= ${query} &limit=10`;
 
-    console.log(this._historial);
+    this.http.get(url).subscribe((resp:any)=>{
+      console.log(resp.data);
+      this.resultados=resp.data;
+;    });
+    //console.log(this._historial);
     
   }
 
-  constructor() { }
+  constructor(private http: HttpClient ) { }
 }
